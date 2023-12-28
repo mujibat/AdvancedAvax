@@ -1,66 +1,68 @@
-## Foundry
+# Solidity by Example ERC-20 Token Contract
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## Overview
 
-Foundry consists of:
+This contract represents a basic implementation of the ERC-20 token standard in the Solidity programming language. It provides functionalities for token transfers, approvals, and a basic minting and burning mechanism.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## SPDX-License-Identifier
 
-## Documentation
+This contract is licensed under the MIT License. Please refer to the [MIT License](https://opensource.org/licenses/MIT) for the full text.
 
-https://book.getfoundry.sh/
+## Prerequisites
 
-## Usage
+- Solidity version: ^0.8.17
 
-### Build
+## ERC-20 Token Details
 
-```shell
-$ forge build
-```
+- **Name:** Solidity by Example
+- **Symbol:** SOLBYEX
+- **Decimals:** 18
 
-### Test
+## Functions
 
-```shell
-$ forge test
-```
+### `transfer`
 
-### Format
+solidity
+function transfer(address recipient, uint amount) external returns (bool);
+Transfers a specified amount of tokens from the sender's account to the recipient's account.
 
-```shell
-$ forge fmt
-```
+### approve
+function approve(address spender, uint amount) external returns (bool);
+Approves the spender to spend a specified amount of tokens on behalf of the owner.
 
-### Gas Snapshots
+### transferFrom
+function transferFrom(address sender, address recipient, uint amount) external returns (bool);
+Transfers a specified amount of tokens from the sender's account to the recipient's account, provided the sender has been approved by the owner.
 
-```shell
-$ forge snapshot
-```
+### mint
+function mint(uint amount) external;
+Mints a specified amount of new tokens, adding them to the total supply and the sender's balance.
 
-### Anvil
+### burn
+function burn(uint amount) external;
+Burns a specified amount of tokens, reducing the total supply and the sender's balance.
 
-```shell
-$ anvil
-```
+# Vault Contract for ERC-20 Tokens
 
-### Deploy
+## Overview
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+The Vault contract is designed to securely manage deposits and withdrawals of ERC-20 tokens while issuing and redeeming corresponding shares to participants. This implementation follows the ERC-20 interface for compatibility and transparency.
 
-### Cast
+## SPDX-License-Identifier
 
-```shell
-$ cast <subcommand>
-```
+This contract is licensed under the MIT License. Please refer to the [MIT License](https://opensource.org/licenses/MIT) for the full text.
 
-### Help
+## ERC-20 Interface
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+This contract includes the standard ERC-20 interface as specified by the `IERC20` interface. This allows seamless interaction with the ERC-20 ecosystem.
+
+## Vault Contract
+
+The `Vault` contract manages deposits and withdrawals of ERC-20 tokens while issuing and redeeming shares to participants.
+
+### Constructor
+
+```solidity
+constructor(address _token) {
+    token = IERC20(_token);
+}
